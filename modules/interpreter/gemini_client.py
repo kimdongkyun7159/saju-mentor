@@ -7,8 +7,10 @@ from pathlib import Path
 import google.generativeai as genai
 from dotenv import load_dotenv
 
-# .env 로드 (프로젝트 루트)
-load_dotenv(Path(__file__).resolve().parents[2] / ".env")
+# .env 로드 (프로젝트 루트, 없으면 무시 — Render는 환경변수 직접 주입)
+_env_path = Path(__file__).resolve().parents[2] / ".env"
+if _env_path.exists():
+    load_dotenv(_env_path)
 
 API_KEY = os.getenv("GEMINI_API_KEY", "")
 MODEL_NAME = "gemini-2.0-flash"
