@@ -1,6 +1,7 @@
 """사주멘토 — FastAPI 라우팅 (100줄 이하)"""
 
 import json
+import os
 from contextlib import asynccontextmanager
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse, JSONResponse
@@ -97,4 +98,5 @@ async def global_error(request: Request, exc: Exception):
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=5031)
+    port = int(os.environ.get("PORT", 5031))
+    uvicorn.run(app, host="0.0.0.0", port=port)

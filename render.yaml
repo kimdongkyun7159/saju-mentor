@@ -1,0 +1,15 @@
+services:
+  - type: web
+    runtime: python
+    name: saju-mentor
+    repo: https://github.com/kimdongkyun7159/saju-mentor
+    branch: master
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app:app --host 0.0.0.0 --port $PORT
+    region: oregon
+    plan: free
+    envVars:
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: PORT
+        value: 10000
