@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+.env
+data/*.db
+build/
+dist/
+*.spec
+*.exe
+.claude/
+fortune_backup.py

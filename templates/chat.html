@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="chat-container">
+    <!-- 사이드바: 사주 요약 -->
+    <aside class="sidebar glass-panel" id="sidebar">
+        <div class="sidebar-header">
+            <div class="user-avatar" id="userAvatar">{{ nickname[0] if nickname else '?' }}</div>
+            <div class="user-info">
+                <h3 id="userName">{{ nickname }}</h3>
+                <p class="user-saju" id="userSaju"></p>
+            </div>
+            <button class="sidebar-toggle" id="sidebarToggle" aria-label="사이드바 토글">☰</button>
+        </div>
+        <div class="sidebar-content" id="sidebarContent">
+            <div class="saju-grid" id="sajuGrid"></div>
+            <div class="oheng-bars" id="ohengBars"></div>
+            <div class="saju-summary" id="sajuSummary"></div>
+            <div class="current-fortune" id="currentFortune"></div>
+            <div class="daeun-flow" id="daeunFlow"></div>
+        </div>
+    </aside>
+
+    <!-- 채팅 영역 -->
+    <main class="chat-main">
+        <div class="chat-header glass-panel">
+            <button class="mobile-menu" id="mobileMenu" aria-label="메뉴">☰</button>
+            <div class="chat-title">
+                <h2>사주멘토</h2>
+                <span class="subtitle">사주도 풀고, 내 마음도 풀고</span>
+            </div>
+            <button class="btn-new-chat" id="newChatBtn" title="새 상담">↻</button>
+        </div>
+
+        <div class="chat-messages" id="chatMessages">
+            <!-- 메시지가 여기 추가됨 -->
+        </div>
+
+        <!-- 빠른 질문 버튼 (2줄) -->
+        <div class="quick-actions" id="quickActions">
+            <button class="chip" data-category="personality">🌟 성격</button>
+            <button class="chip" data-category="career">💼 직업</button>
+            <button class="chip" data-category="love">💕 연애</button>
+            <button class="chip" data-category="wealth">💰 재물</button>
+            <button class="chip" data-category="health">🏥 건강</button>
+            <button class="chip highlight" data-category="fortune">🔮 올해총운</button>
+            <button class="chip" data-category="monthly">📆 월별운세</button>
+            <button class="chip" data-category="supplement">🔄 오행보충</button>
+        </div>
+
+        <div class="chat-input-area glass-panel">
+            <form id="chatForm" class="chat-form">
+                <input type="text" id="chatInput" placeholder="궁금한 것을 물어보세요... (예: 올해 재물운은? 이직해도 될까?)" autocomplete="off">
+                <button type="submit" class="btn-send" id="sendBtn" aria-label="전송">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 2L11 13M22 2L15 22L11 13M22 2L2 9L11 13"/>
+                    </svg>
+                </button>
+            </form>
+        </div>
+    </main>
+</div>
+
+<script>
+    const USER_ID = {{ user_id }};
+    const NICKNAME = "{{ nickname }}";
+    const SAJU_DATA = {{ saju_json | safe }};
+    const GREETING = {{ greeting_json | safe }};
+</script>
+<script src="/static/js/chat.js"></script>
+{% endblock %}

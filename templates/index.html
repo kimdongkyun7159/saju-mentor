@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="landing-container">
+    <!-- 배경 파티클 -->
+    <div class="particles" id="particles"></div>
+
+    <!-- 히어로 -->
+    <header class="hero">
+        <div class="logo-area">
+            <div class="logo-icon">
+                <svg viewBox="0 0 80 80" fill="none">
+                    <circle cx="40" cy="40" r="36" stroke="url(#grad)" stroke-width="2.5" opacity="0.6"/>
+                    <circle cx="40" cy="40" r="24" stroke="url(#grad)" stroke-width="2"/>
+                    <circle cx="40" cy="40" r="12" fill="url(#grad)" opacity="0.8"/>
+                    <path d="M40 4 L40 76 M4 40 L76 40" stroke="url(#grad)" stroke-width="1" opacity="0.3"/>
+                    <defs>
+                        <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#a78bfa"/>
+                            <stop offset="100%" style="stop-color:#f472b6"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+            </div>
+            <h1 class="logo-text">사주멘토</h1>
+            <p class="tagline">사주도 풀고, 내 마음도 풀고</p>
+        </div>
+    </header>
+
+    <!-- 입력 폼 -->
+    <main class="form-section">
+        <form id="loginForm" class="glass-card">
+            <div class="form-group">
+                <label for="nickname">이름 또는 닉네임</label>
+                <input type="text" id="nickname" name="nickname" placeholder="당신을 뭐라고 부를까요?" required>
+            </div>
+
+            <div class="form-group calendar-type-group">
+                <label>달력 유형</label>
+                <div class="radio-group">
+                    <label class="radio-label">
+                        <input type="radio" name="calendar_type" value="solar" checked>
+                        <span class="radio-custom"></span>양력
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="calendar_type" value="lunar">
+                        <span class="radio-custom"></span>음력
+                    </label>
+                    <label class="checkbox-label lunar-option" id="intercalationWrap" style="display:none">
+                        <input type="checkbox" id="isIntercalation" name="is_intercalation">
+                        <span class="checkbox-custom"></span>윤달
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="birthYear">생년</label>
+                    <input type="number" id="birthYear" name="birth_year" placeholder="1995" min="1900" max="2100" required>
+                </div>
+                <div class="form-group">
+                    <label for="birthMonth">월</label>
+                    <select id="birthMonth" name="birth_month" required>
+                        <option value="">월</option>
+                        {% for m in range(1, 13) %}
+                        <option value="{{ m }}">{{ m }}월</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="birthDay">일</label>
+                    <select id="birthDay" name="birth_day" required>
+                        <option value="">일</option>
+                        {% for d in range(1, 32) %}
+                        <option value="{{ d }}">{{ d }}일</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="birthHour">태어난 시간</label>
+                    <select id="birthHour" name="birth_hour" required>
+                        <option value="">시</option>
+                        <option value="0">자시 (00시)</option>
+                        <option value="1">축시 (01시)</option>
+                        <option value="2">축시 (02시)</option>
+                        <option value="3">인시 (03시)</option>
+                        <option value="4">인시 (04시)</option>
+                        <option value="5">묘시 (05시)</option>
+                        <option value="6">묘시 (06시)</option>
+                        <option value="7">진시 (07시)</option>
+                        <option value="8">진시 (08시)</option>
+                        <option value="9">사시 (09시)</option>
+                        <option value="10">사시 (10시)</option>
+                        <option value="11">오시 (11시)</option>
+                        <option value="12">오시 (12시)</option>
+                        <option value="13">미시 (13시)</option>
+                        <option value="14">미시 (14시)</option>
+                        <option value="15">신시 (15시)</option>
+                        <option value="16">신시 (16시)</option>
+                        <option value="17">유시 (17시)</option>
+                        <option value="18">유시 (18시)</option>
+                        <option value="19">술시 (19시)</option>
+                        <option value="20">술시 (20시)</option>
+                        <option value="21">해시 (21시)</option>
+                        <option value="22">해시 (22시)</option>
+                        <option value="23">자시 (23시)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="gender">성별</label>
+                    <select id="gender" name="gender" required>
+                        <option value="male">남자</option>
+                        <option value="female">여자</option>
+                    </select>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-primary" id="submitBtn">
+                <span class="btn-text">내 사주 풀어보기</span>
+                <span class="btn-loader" style="display:none">
+                    <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                </span>
+            </button>
+        </form>
+    </main>
+
+    <footer class="landing-footer">
+        <p>만세력 기반 정밀 사주 분석 · 억부용신론 · 야자시/조자시 지원</p>
+    </footer>
+</div>
+
+<script src="/static/js/app.js"></script>
+{% endblock %}
